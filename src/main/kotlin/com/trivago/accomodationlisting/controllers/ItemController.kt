@@ -3,9 +3,14 @@ package com.trivago.accomodationlisting.controllers
 import com.trivago.accomodationlisting.dtos.ItemDTO
 import com.trivago.accomodationlisting.services.ItemService
 import jakarta.validation.Valid
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatus
+import org.springframework.validation.Validator
 import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.WebDataBinder
 import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("/v1/items")
@@ -14,13 +19,12 @@ class ItemController(
     val itemService: ItemService
 ) {
 
-
     @PostMapping("/{item_id}/book")
     fun bookItem(@PathVariable("item_id") itemId: Int) = itemService.bookItem(itemId)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun addItem(@RequestBody itemDTO: ItemDTO): ItemDTO = itemService.addItem(itemDTO)
+    fun addItem(@RequestBody @Valid itemDTO: ItemDTO): ItemDTO = itemService.addItem(itemDTO)
 
     @GetMapping("/{item_id}")
     fun getItem(@PathVariable("item_id") itemId:Int) : ItemDTO? = itemService.getItem(itemId)

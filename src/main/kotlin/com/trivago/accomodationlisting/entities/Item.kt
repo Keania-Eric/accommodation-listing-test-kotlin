@@ -1,8 +1,11 @@
 package com.trivago.accomodationlisting.entities
 
+import com.trivago.accomodationlisting.listeners.ItemListener
 import jakarta.persistence.*
 
+
 @Entity
+@EntityListeners(ItemListener::class)
 @Table(name = "items")
 data class Item(
     @Id
