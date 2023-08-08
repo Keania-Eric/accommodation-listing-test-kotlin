@@ -5,6 +5,7 @@ import com.trivago.accomodationlisting.dtos.LocationDTO
 import com.trivago.accomodationlisting.entities.Item
 import com.trivago.accomodationlisting.entities.Location
 import com.trivago.accomodationlisting.exceptions.HotelierNotValidException
+import com.trivago.accomodationlisting.exceptions.ItemNotFoundException
 import com.trivago.accomodationlisting.repositories.HotelierRepository
 import com.trivago.accomodationlisting.repositories.ItemRepository
 import com.trivago.accomodationlisting.repositories.LocationRepository
@@ -87,6 +88,19 @@ class ItemService(
             }
 
             ItemDTO(item.id, item.name, item.rating, item.category, item.image, item.reputation, item.reputationBadge, item.price, item.availability, null, locationDTO)
+        }
+    }
+
+
+    fun deleteItem(itemId: Int) {
+        val existingItem = itemRepository.findById(itemId)
+
+        return if (existingItem.isPresent) {
+            existingItem.get().let {
+                itemRepository.deleteById(itemId)
+            }
+        }else {
+            throw ItemNotFoundException("No item found for the supplied id: $itemId")
         }
     }
 }

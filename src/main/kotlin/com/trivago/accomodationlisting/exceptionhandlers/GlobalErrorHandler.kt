@@ -1,6 +1,7 @@
 package com.trivago.accomodationlisting.exceptionhandlers
 
 import com.trivago.accomodationlisting.exceptions.HotelierNotValidException
+import com.trivago.accomodationlisting.exceptions.ItemNotFoundException
 import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,6 +18,14 @@ class GlobalErrorHandler: ResponseEntityExceptionHandler() {
 
 
      companion object: KLogging()
+
+    @ExceptionHandler(ItemNotFoundException::class)
+    fun handleItemNotFoundExceptions(ex: ItemNotFoundException, request: WebRequest): ResponseEntity<Any> {
+
+        logger.info("An error occurred here ${ex.message}")
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.message)
+    }
 
     @ExceptionHandler(HotelierNotValidException::class)
     fun handleHotelierNotValidExceptions(ex: HotelierNotValidException, request: WebRequest): ResponseEntity<Any> {

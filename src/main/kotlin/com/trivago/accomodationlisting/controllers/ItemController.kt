@@ -21,6 +21,10 @@ class ItemController(
     @GetMapping("/{item_id}")
     fun getItem(@PathVariable("item_id") itemId:Int) : ItemDTO? = itemService.getItem(itemId)
 
+    @DeleteMapping("/{item_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteItem(@PathVariable("item_id") itemId:Int)  = itemService.deleteItem(itemId)
+
     @GetMapping("/hotelier/{hotelier_id}")
     fun getItemsForHotelier(@PathVariable("hotelier_id") hotelierId:Int): List<ItemDTO?> = itemService.getItemsForHotelier(hotelierId)
 }

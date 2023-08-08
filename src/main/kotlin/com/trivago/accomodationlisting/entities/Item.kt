@@ -23,7 +23,9 @@ data class Item(
     val hotelier: Hotelier = Hotelier(),
 
     @OneToOne(
-        mappedBy = "item"
+        mappedBy = "item",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
     )
     val location: Location? = null
 ) {
