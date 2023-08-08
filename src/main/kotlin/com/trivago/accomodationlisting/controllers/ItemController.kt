@@ -15,6 +15,9 @@ class ItemController(
 ) {
 
 
+    @PostMapping("/{item_id}/book")
+    fun bookItem(@PathVariable("item_id") itemId: Int) = itemService.bookItem(itemId)
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun addItem(@RequestBody itemDTO: ItemDTO): ItemDTO = itemService.addItem(itemDTO)

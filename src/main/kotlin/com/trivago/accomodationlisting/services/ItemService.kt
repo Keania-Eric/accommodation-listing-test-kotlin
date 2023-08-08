@@ -62,6 +62,25 @@ class ItemService(
     }
 
 
+    fun bookItem(itemId: Int) {
+
+        val existingItem = itemRepository.findById(itemId)
+
+        return if (existingItem.isPresent) {
+            existingItem.get().let {
+
+                val availability = it.availability
+                it.availability = availability - 1
+                itemRepository.save(it)
+                Unit
+            }
+        }else {
+            throw ItemNotFoundException("No item found for the supplied id: $itemId")
+        }
+
+    }
+
+
     fun getItemsForHotelier(hotelierId:Int) : List<ItemDTO?> {
 
         val items = itemRepository.findItemsByHotelierId(hotelierId)
