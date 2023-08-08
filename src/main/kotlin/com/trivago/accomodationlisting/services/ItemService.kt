@@ -57,4 +57,18 @@ class ItemService(
         }
 
     }
+
+
+    fun getItemsForHotelier(hotelierId:Int) : List<ItemDTO?> {
+
+        val items = itemRepository.findItemsByHotelierId(hotelierId)
+
+        return items.map{ item ->
+
+            val locationDTO = item.location?.let{
+                LocationDTO(null, it.city, it.state, it.country, it.zipcode, it.address)
+            }
+            ItemDTO(item.id, item.name, item.rating, item.category, item.image, item.reputation, item.reputationBadge, item.price, item.availability, null, locationDTO)
+        }
+    }
 }

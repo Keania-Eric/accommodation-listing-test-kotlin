@@ -1,8 +1,10 @@
 package com.trivago.accomodationlisting.services
 
 import com.trivago.accomodationlisting.dtos.HotelierDTO
+import com.trivago.accomodationlisting.dtos.ItemDTO
 import com.trivago.accomodationlisting.entities.Hotelier
 import com.trivago.accomodationlisting.repositories.HotelierRepository
+import com.trivago.accomodationlisting.repositories.ItemRepository
 import org.springframework.stereotype.Service
 import java.util.Optional
 
@@ -23,6 +25,10 @@ class HotelierService (
     fun findHotelierById(hotelierId:Int?): Optional<Hotelier> {
         return hotelierRepository.findById(hotelierId ?: 0)
     }
+
+
+
+
 
 
 }
