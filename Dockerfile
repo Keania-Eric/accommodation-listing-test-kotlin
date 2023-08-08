@@ -1,22 +1,16 @@
 # Use the official OpenJDK image with the latest version as the base image
-FROM openjdk:latest
+FROM amazoncorretto:17-alpine-jdk
+# Create a directory
+WORKDIR /app
 
-# Install 'findutils' using microdnf (package manager)
-RUN microdnf install findutils
+# Copy all the files from the current directory to the image
+COPY . .
 
-# Create a volume at /tmp for the application
-VOLUME /tmp
+# build the project avoiding tests
+RUN ./gradlew clean build -x test
 
-# Create a directory named /accomodationlisting in the container
-RUN mkdir /accomodationlisting
+# Expose port 8080
+EXPOSE 8080
 
-# Copy the application source code into the /accomodationlisting directory
-COPY . /accomodationlisting
-WORKDIR /accomodationlisting
-
-# Build the application using Gradle and exclude tests
-RUN ./gradlew clean build -x test &&  \
-    cp build/libs/accomodationlisting.jar accomodationlisting.jar
-
-# Define the entry point command to run the Spring Boot application
-ENTRYPOINT ["sh", "-c", "java -jar accomodationlisting.jar"]
+# Run the jar file
+CMD ["java", "-jar", "./build/libs/accomodationlisting-0.0.1-SNAPSHOT.jar"]
