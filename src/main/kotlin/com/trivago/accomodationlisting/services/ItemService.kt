@@ -12,6 +12,8 @@ import mu.KLogging
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
+
+
 @Service
 class ItemService(
     val itemRepository: ItemRepository,
@@ -68,6 +70,22 @@ class ItemService(
             val locationDTO = item.location?.let{
                 LocationDTO(null, it.city, it.state, it.country, it.zipcode, it.address)
             }
+            ItemDTO(item.id, item.name, item.rating, item.category, item.image, item.reputation, item.reputationBadge, item.price, item.availability, null, locationDTO)
+        }
+    }
+
+
+    fun getItem(itemId:Int): ItemDTO {
+
+        val itemOptional  = itemRepository.findById(itemId)
+
+
+        return itemOptional.get().let{ item ->
+
+            val locationDTO = item.location?.let{
+                LocationDTO(null, it.city, it.state, it.country, it.zipcode, it.address)
+            }
+
             ItemDTO(item.id, item.name, item.rating, item.category, item.image, item.reputation, item.reputationBadge, item.price, item.availability, null, locationDTO)
         }
     }

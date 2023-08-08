@@ -18,6 +18,9 @@ class ItemController(
     @ResponseStatus(HttpStatus.CREATED)
     fun addItem(@RequestBody itemDTO: ItemDTO): ItemDTO = itemService.addItem(itemDTO)
 
+    @GetMapping("/{item_id}")
+    fun getItem(@PathVariable("item_id") itemId:Int) : ItemDTO? = itemService.getItem(itemId)
+
     @GetMapping("/hotelier/{hotelier_id}")
     fun getItemsForHotelier(@PathVariable("hotelier_id") hotelierId:Int): List<ItemDTO?> = itemService.getItemsForHotelier(hotelierId)
 }
