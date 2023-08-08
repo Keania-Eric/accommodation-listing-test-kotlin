@@ -11,8 +11,8 @@ data class Item(
     val id:Int?,
 
     val name:String,
-    val rating: Int?,
-    val category: String?,
+    val rating: Int,
+    val category: String,
     val image:String,
     val reputation:Int,
     val reputationBadge:String,
@@ -21,7 +21,7 @@ data class Item(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotelier_id", nullable = false)
-    val hotelier: Hotelier? = null,
+    val hotelier: Hotelier,
 
     @OneToOne(
         mappedBy = "item"

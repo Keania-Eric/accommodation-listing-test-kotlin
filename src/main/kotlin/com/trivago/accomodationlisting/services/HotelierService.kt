@@ -4,6 +4,7 @@ import com.trivago.accomodationlisting.dtos.HotelierDTO
 import com.trivago.accomodationlisting.entities.Hotelier
 import com.trivago.accomodationlisting.repositories.HotelierRepository
 import org.springframework.stereotype.Service
+import java.util.Optional
 
 @Service
 class HotelierService (
@@ -16,6 +17,11 @@ class HotelierService (
         return hotelier.let {
             HotelierDTO(it.id, it.name)
         }
+    }
+
+
+    fun findHotelierById(hotelierId:Int?): Optional<Hotelier> {
+        return hotelierRepository.findById(hotelierId ?: 0)
     }
 
 

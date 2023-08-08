@@ -20,4 +20,7 @@ data class Hotelier(
 
     var items:List<Item> = mutableListOf()
 ) {
+
+    constructor() : this(null, "", emptyList()) // Default constructor
+
 }
