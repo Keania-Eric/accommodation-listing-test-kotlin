@@ -1,0 +1,484 @@
+openapi: 3.0.0
+info:
+  title: Trivago Accomodation Listing
+  version: 1.0.0
+servers:
+  - url: http://{{base_uri}}
+tags:
+  - name: Hotelier
+  - name: Item
+paths:
+  /v1/hotelier:
+    post:
+      tags:
+        - Hotelier
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: James Kruger
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 08 Aug 2023 14:04:47 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 54
+                name: James Kruger
+    get:
+      tags:
+        - Hotelier
+      summary: Get All
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/items:
+    get:
+      tags:
+        - Item
+      summary: Items By Hotelier
+      parameters:
+        - name: hotelier_id
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 08 Aug 2023 20:38:01 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - id: 2
+                  name: Example name
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location: null
+                - id: 4
+                  name: Example name
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 52
+                  name: Ex
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 102
+                  name: Ex
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 103
+                  name: Hotel names
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 152
+                  name: Hotel names
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 202
+                  name: Hotel names
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 203
+                  name: Hotel names
+                  rating: 5
+                  category: hotel
+                  image: image-url.com
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 10
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: santiago
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+                - id: 1
+                  name: Eifel Palace
+                  rating: 5
+                  category: hotel
+                  image: >-
+                    https://images.pexels.com/photos/17021500/pexels-photo-17021500/free-photo-of-cat-looking-up.jpeg
+                  reputation: 8990
+                  reputationBadge: green
+                  price: 1000
+                  availability: 8
+                  hotelierId: null
+                  location:
+                    id: null
+                    city: Tenesse
+                    state: alabama
+                    country: US
+                    zipcode: '34567'
+                    address: No 4 brooklyn town
+                    itemId: null
+    post:
+      tags:
+        - Item
+      summary: Create Item
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                hotelierId: 1
+                name: Hotel names
+                rating: 5
+                category: hotel
+                image: image-url.com
+                reputation: 8990
+                reputationBadge: green
+                price: 1000
+                availability: 10
+                location:
+                  city: santiago
+                  state: alabama
+                  country: US
+                  zipcode: '34567'
+                  address: No 4 brooklyn town
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 08 Aug 2023 21:17:15 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 452
+                name: ' things dey purge'
+                rating: 5
+                category: hotel
+                image: >-
+                  https://images.pexels.com/photos/17021500/pexels-photo-17021500/free-photo-of-cat-looking-up.jpeg
+                reputation: 100
+                reputationBadge: red
+                price: 1000
+                availability: 10
+                hotelierId: 1
+                location:
+                  id: 502
+                  city: santiago
+                  state: alabama
+                  country: US
+                  zipcode: '34567'
+                  address: No 4 brooklyn town
+                  itemId: null
+  /v1/items/3:
+    get:
+      tags:
+        - Item
+      summary: Get Item
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 08 Aug 2023 16:06:03 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 3
+                name: Example name
+                rating: 5
+                category: hotel
+                image: image-url.com
+                reputation: 8990
+                reputationBadge: green
+                price: 1000
+                availability: 10
+                hotelierId: null
+                location:
+                  id: null
+                  city: santiago
+                  state: alabama
+                  country: US
+                  zipcode: '34567'
+                  address: No 4 brooklyn town
+                  itemId: null
+    delete:
+      tags:
+        - Item
+      summary: Delete Item
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/items/1:
+    put:
+      tags:
+        - Item
+      summary: Update Item
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\n\t\"hotelierId\": 1,\n\t\"name\": \"Eifel
+                Palace\",\n\t\"rating\": 5,\n\t\"category\":
+                \"hotel\",\n\t\"image\":
+                \"https://images.pexels.com/photos/17021500/pexels-photo-17021500/free-photo-of-cat-looking-up.jpeg\",\n\t\"reputation\":
+                600,\n\t\"reputationBadge\": \"green\",\n\t\"price\":
+                1000,\n\t\"availability\": 10,\n    \"location\": {\n       
+                \"city\": \"Tenesse\",\n        \"state\": \"alabama\",\n       
+                \"country\": \"US\",\n        \"zipcode\": \"34567\",\n       
+                \"address\": \"No 4 brooklyn town\"\n    }\n}"
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 08 Aug 2023 21:17:49 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Eifel Palace
+                rating: 5
+                category: hotel
+                image: >-
+                  https://images.pexels.com/photos/17021500/pexels-photo-17021500/free-photo-of-cat-looking-up.jpeg
+                reputation: 600
+                reputationBadge: yellow
+                price: 1000
+                availability: 8
+                hotelierId: null
+                location:
+                  id: 52
+                  city: Tenesse
+                  state: alabama
+                  country: US
+                  zipcode: '34567'
+                  address: No 4 brooklyn town
+                  itemId: null
+  /v1/items/1/book:
+    post:
+      tags:
+        - Item
+      summary: Book Item
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
