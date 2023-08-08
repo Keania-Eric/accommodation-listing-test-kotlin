@@ -91,6 +91,64 @@ class ItemService(
         }
     }
 
+    fun updateItem(itemDTO: ItemDTO, itemId: Int): ItemDTO {
+
+        val existingItem = itemRepository.findById(itemId)
+
+        return if (existingItem.isPresent) {
+            existingItem.get().let {
+                it.name = itemDTO.name
+                it.rating = itemDTO.rating
+                it.category = itemDTO.category
+                it.image = itemDTO.image
+                it.reputation = itemDTO.reputation
+                it.reputationBadge = itemDTO.reputationBadge
+                it.price = itemDTO.price
+
+                itemRepository.save(it)
+
+                val locationEntity = it.location ?: Location()
+
+
+                val locationDTO = locationEntity.let { location ->
+                    location.state = itemDTO.location?.state ?: location.state
+                    location.city = itemDTO.location?.city ?: location.city
+                    location.country = itemDTO.location?.country ?: location.country
+                    location.zipcode = itemDTO.location?.zipcode ?: location.zipcode
+                    location.address = itemDTO.location?.address ?: location.address
+                    location.item = it // so we can update for new location
+                    locationRepository.save(location)
+
+                    LocationDTO(
+                        location.id,
+                        location.city,
+                        location.state,
+                        location.country,
+                        location.zipcode,
+                        location.address
+                    )
+                }
+
+                ItemDTO(
+                    it.id,
+                    it.name,
+                    it.rating,
+                    it.category,
+                    it.image,
+                    it.reputation,
+                    it.reputationBadge,
+                    it.price,
+                    it.availability,
+                    null,
+                    locationDTO
+                )
+            }
+        }else  {
+            throw ItemNotFoundException("No item found for the supplied id: $itemId")
+        }
+
+    }
+
 
     fun deleteItem(itemId: Int) {
         val existingItem = itemRepository.findById(itemId)

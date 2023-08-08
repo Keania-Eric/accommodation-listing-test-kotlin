@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/v1/items")
+@Validated
 class ItemController(
     val itemService: ItemService
 ) {
@@ -21,6 +22,9 @@ class ItemController(
     @GetMapping("/{item_id}")
     fun getItem(@PathVariable("item_id") itemId:Int) : ItemDTO? = itemService.getItem(itemId)
 
+
+    @PutMapping("/{item_id}")
+    fun updateItem(@RequestBody @Valid itemDTO: ItemDTO, @PathVariable("item_id") itemId: Int) = itemService.updateItem(itemDTO, itemId)
     @DeleteMapping("/{item_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteItem(@PathVariable("item_id") itemId:Int)  = itemService.deleteItem(itemId)

@@ -9,14 +9,14 @@ data class Item(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Int? = null,
 
-    val name: String = "",
-    val rating: Int = 0,
-    val category: String = "",
-    val image: String = "",
-    val reputation: Int = 0,
-    val reputationBadge: String = "",
-    val price: Int = 0,
-    val availability: Int = 0,
+    var name: String = "",
+    var rating: Int = 0,
+    var category: String = "",
+    var image: String = "",
+    var reputation: Int = 0,
+    var reputationBadge: String = "",
+    var price: Int = 0,
+    var availability: Int = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotelier_id", nullable = false)

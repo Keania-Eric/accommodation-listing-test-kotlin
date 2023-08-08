@@ -9,15 +9,15 @@ data class Location(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Int? = null,
 
-    val city: String = "",
-    val state: String = "",
-    val country: String = "",
-    val zipcode: String = "",
-    val address: String = "",
+    var city: String = "",
+    var state: String = "",
+    var country: String = "",
+    var zipcode: String = "",
+    var address: String = "",
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
-    val item: Item? = null
+    var item: Item? = null
 ) {
     constructor() : this(null)
 }
